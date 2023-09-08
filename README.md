@@ -8,3 +8,6 @@ following things
 - Sentence count
 - Paragraph count
 - Punctuation count
+
+i should add that this is a smallish project to get me back      
+into programming as i havent really done it in a while
