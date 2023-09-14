@@ -7,17 +7,18 @@
 int main(int argc, char** argv) {
     // // make sure the user supplys a the minimum number of args
     // if (argc < 2) {
-    //     fprintf(stderr, "Usage: lwspp -filename- -tag(optional)");
+    //     fprintf(stderr, "Usage: lwspp -filename-");
 
     //     // exit
     //     exit(1);
     // }
+    // function pointers
+    int (*funcs[4]) (FILE* file) = {line_count, word_count, 
+                para_count, punc_count};
 
-    FILE* file = open_file("test.txt");
-    //int lc = line_count(file);
-    int wc = punc_count(file);
-
-    //printf("%i", lc);
-    
-   printf("\n%i", wc);
+    for (int i = 0; i < 4; i++) {
+        FILE* f = open_file("test.txt");
+        int num = funcs[i](f);
+        printf("%i\n", num);
+    }
 }

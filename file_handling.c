@@ -23,50 +23,53 @@ FILE* open_file(const char* file_name) {
 }
 
 int line_count(FILE* file) {
-    // this is where we will store the characters as we read them
+    // this is where all the characters will be stored
     char contents[BUFFER];
 
-    // this keeps track of haw many lines
-    // starts at 1 as there is always 1 line
-    int lc = 1;
+    // there will always be 1 line
+    int lc = 0;
 
-    // read through the whole file
     while (fgets(contents, BUFFER, file)) {
-        for (int x = 0; x < BUFFER; x++) {
-            // check if you encounter a new line
-            if (contents[x] == '\n') {
-                // if you do add 1 to the count
+        // for loop to go through each character
+        for (int i = 0; i < BUFFER; i++) {
+            // check if its an empty line
+            if (i == 0 && contents[i] == '\n') {
                 lc++;
+                break;
+            }
+
+            // check if its a new line
+            if (contents[i] == '\n') {
+                lc++;
+                break;
             }
         }
     }
-    // there is always a extra new line
-    lc--;
-    
-    return lc;
+    // always misses the last line
+    return ++lc;
 }
 
 int word_count(FILE* file) {
     char contents[BUFFER];
 
-    // keeps track of words
+    // holds the number of words
     int wc = 0;
 
     while (fgets(contents, BUFFER, file)) {
         for (int i = 0; i < BUFFER; i++) {
-            if (contents[i] == '\000') {
+            if (i == 0 && contents[i] == '\n') {
                 break;
             }
-            else if (contents[i] == ' ' && contents[i + 1] != ' ' || contents[i] == '\n') {
+
+            if (contents[i] == ' ' && contents[i + 1] != ' ' || contents[i] == '\n') {
                 wc++;
             }
         }
     }
-    // doesnt count the last word so add one
-    wc++;
-
-    return wc;
+    // doesnt count the last word
+    return ++wc;
 }
+
 
 int para_count(FILE* file) {
     char contents[BUFFER];
