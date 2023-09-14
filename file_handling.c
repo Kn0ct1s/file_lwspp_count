@@ -49,9 +49,6 @@ int line_count(FILE* file) {
 int word_count(FILE* file) {
     char contents[BUFFER];
 
-    // things that differntiate between words
-    char nonwords[] = " \n";
-
     // keeps track of words
     int wc = 0;
 
@@ -69,4 +66,26 @@ int word_count(FILE* file) {
     wc++;
 
     return wc;
+}
+
+int para_count(FILE* file) {
+    char contents[BUFFER];
+
+    int para_count = 0;
+    
+    while (fgets(contents, BUFFER, file)) {
+        for (int i = 0; i < BUFFER; i++) {
+            if (i == 0 && contents[i] == '\n') {
+                break;
+            }
+
+            if (contents[i] == '\n' && contents[i + 1] == '\000') {
+                para_count++;
+                break;
+            }
+        }
+    }
+
+    // doesnt count the last paragraph so add 1
+    return ++para_count;
 }
