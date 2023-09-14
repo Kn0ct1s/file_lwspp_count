@@ -7,4 +7,6 @@
     int line_count(FILE* file);
     int word_count(FILE* file);
     int para_count(FILE* file);
+    int punc_count(FILE* file);
+    
 #endif

@@ -15,7 +15,7 @@ int main(int argc, char** argv) {
 
     FILE* file = open_file("test.txt");
     //int lc = line_count(file);
-    int wc = para_count(file);
+    int wc = punc_count(file);
 
     //printf("%i", lc);
     

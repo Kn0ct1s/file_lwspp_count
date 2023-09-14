@@ -89,3 +89,21 @@ int para_count(FILE* file) {
     // doesnt count the last paragraph so add 1
     return ++para_count;
 }
+
+int punc_count(FILE* file) {
+    char contents[BUFFER];
+
+    int punc_count = 0;
+
+    while (fgets(contents, BUFFER, file)) {
+
+        for (int i = 0; i < BUFFER; i++) {
+            switch (contents[i]) {
+                case '.': case ',': case '?':
+                case '!': case ';': case ':':
+                    punc_count++;
+            }
+        }
+    }
+    return punc_count;
+}
